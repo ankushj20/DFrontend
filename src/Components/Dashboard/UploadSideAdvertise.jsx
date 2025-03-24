@@ -25,7 +25,7 @@ const UploadSideAdvertise = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5100/api/ads/upload-ad",
+        `${process.env.REACT_APP_BASE_URL}/api/ads/upload-ad`,
         formData
       );
       if (response.data.success) {

@@ -15,13 +15,13 @@ const Login = ({ setIsAuthenticated }) => {
     setError(""); 
 
     try {
-      const response = await axios.post("http://localhost:5100/api/auth/login", 
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, 
         { username, password }, 
         { withCredentials: true }
       );
 
       if (response.status === 200) {
-        const authCheck = await axios.get("http://localhost:5100/api/auth/check-auth", { withCredentials: true });
+        const authCheck = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/auth/check-auth `, { withCredentials: true });
 
         if (authCheck.data.authenticated) {
           setIsAuthenticated(true);

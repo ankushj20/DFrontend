@@ -58,7 +58,7 @@ const CenterTop = ({ setIsAuthenticated }) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:5100/api/auth/logout", {}, { withCredentials: true });
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/logout`, {}, { withCredentials: true });
 
       setIsAuthenticated(false);  // ✅ State update karo
       localStorage.removeItem("authToken"); 

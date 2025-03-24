@@ -126,7 +126,7 @@ const EditPost = () => {
     console.log("Post ID:", id); // ✅ Check if ID is correct
 
     if (!newPost) {
-      fetch(`http://localhost:5100/api/news/posts/${id}`)
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/news/posts/${id}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error("Post not found");

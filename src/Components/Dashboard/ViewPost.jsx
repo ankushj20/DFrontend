@@ -9,7 +9,7 @@ const ViewPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:5100/api/posts/${id}`);
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/posts/${id}`);
         const data = await response.json();
         setPost(data);
       } catch (err) {

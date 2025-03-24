@@ -12,7 +12,7 @@ const ManagePosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:5100/api/news/posts");
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/news/posts`);
         if (response.ok) {
           let data = await response.json();
           data = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
