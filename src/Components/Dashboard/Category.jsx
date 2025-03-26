@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import BASE_URL from "../Components/utils/config"; // ✅ Base URL import kiya
 
 const categories = [
   "खबर पालिका",
@@ -21,7 +22,7 @@ const Category = () => {
       if (!category) return; // Agar koi category select nahi to API call mat karo
       setLoading(true);
       try {
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/posts?category=${category}`);
+        const response = await fetch(`${BASE_URL}/api/posts?category=${category}`);
         if (response.ok) {
           const data = await response.json();
           setPosts(data);

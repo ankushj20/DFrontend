@@ -52,13 +52,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import BASE_URL from "../Components/utils/config"; // ✅ Base URL import kiya
 
 const CenterTop = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/logout`, {}, { withCredentials: true });
+      await axios.post(`${BASE_URL}/api/auth/logout`, {}, { withCredentials: true });
 
       setIsAuthenticated(false);  // ✅ State update karo
       localStorage.removeItem("authToken"); 

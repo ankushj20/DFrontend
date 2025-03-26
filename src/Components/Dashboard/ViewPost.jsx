@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import BASE_URL from "../Components/utils/config"; // ✅ Base URL import kiya
 
 const ViewPost = () => {
   const { id } = useParams(); // Get the post ID from the URL
@@ -9,7 +10,7 @@ const ViewPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/posts/${id}`);
+        const response = await fetch(`${BASE_URL}/api/posts/${id}`);
         const data = await response.json();
         setPost(data);
       } catch (err) {

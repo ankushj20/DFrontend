@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteConfirmModal from "./DeleteConfirmModal"; // ✅ Import Modal
+import BASE_URL from "../Components/utils/config"; // ✅ Base URL import kiya
 
 const ManagePosts = () => {
   const [posts, setPosts] = useState([]);
@@ -12,7 +13,7 @@ const ManagePosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/news/posts`);
+        const response = await fetch(`${BASE_URL}/api/news/posts`);
         if (response.ok) {
           let data = await response.json();
           data = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

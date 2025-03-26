@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import BASE_URL from "../Components/utils/config"; // ✅ Base URL import kiya
 
 const UploadSideAdvertise = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -25,7 +26,7 @@ const UploadSideAdvertise = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/ads/upload-ad`,
+        `${BASE_URL}/api/ads/upload-ad`,
         formData
       );
       if (response.data.success) {
