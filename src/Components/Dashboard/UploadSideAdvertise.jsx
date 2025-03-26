@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import BASE_URL from "../Components/utils/config"; // ✅ Base URL import kiya
+import BASE_URL from "../utils/config"; // ✅ Base URL import kiya
 
 const UploadSideAdvertise = () => {
   const [selectedImage, setSelectedImage] = useState(null);

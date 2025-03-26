@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import icons
-import BASE_URL from "../Components/utils/config"; // ✅ Base URL import kiya
+import BASE_URL from "../utils/config"; // ✅ Base URL import kiya
 
 const Login = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState("");

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteConfirmModal from "./DeleteConfirmModal"; // ✅ Import Modal
-import BASE_URL from "../Components/utils/config"; // ✅ Base URL import kiya
+import BASE_URL from "../utils/config"; // ✅ Base URL import kiya
 
 const ManagePosts = () => {
   const [posts, setPosts] = useState([]);
