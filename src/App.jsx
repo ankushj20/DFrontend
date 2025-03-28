@@ -13,13 +13,24 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5100/api/auth/check-auth", { withCredentials: true })
-      .then((response) => setIsAuthenticated(response.data.authenticated))
-      .catch(() => setIsAuthenticated(false))
-      .finally(() => setLoading(false));
-  }, []);
+  useEffect(() =>{ 
+    var auth = localStorage.getItem("IsAuthenticated");
+    if(auth === "true"){
+      setIsAuthenticated(true);
+      setLoading(false)
+    } 
+    else{
+      setIsAuthenticated(false)
+      setLoading(false)
+    }
+    //{
+  //   axios
+  //     .get("http://localhost:5100/api/auth/check-auth", { withCredentials: true })
+  //     .then((response) => setIsAuthenticated(response.data.authenticated))
+  //     .catch(() => setIsAuthenticated(false))
+  //     .finally(() => setLoading(false));
+  // }, 
+  },[]);
 
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
@@ -31,7 +42,7 @@ const App = () => {
       <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
 
       {/* Dashboard Protected Routes */}
-      <Route path="/dashboard" element={isAuthenticated ? <DashboardLayout /> : <Navigate to="/" />} >
+      <Route path="/dashboard/*" element={isAuthenticated ? <DashboardLayout /> : <Navigate to="/" />} >
         <Route path="upload-post" element={<UploadPost />} />
         <Route path="category" element={<Category />} />
         <Route path="manage-post" element={<ManagePosts />} />

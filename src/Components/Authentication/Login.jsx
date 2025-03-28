@@ -22,15 +22,17 @@ const Login = ({ setIsAuthenticated }) => {
       );
 
       if (response.status === 200) {
-        const authCheck = await axios.get(`${BASE_URL}/api/auth/check-auth `, { withCredentials: true });
-
-        if (authCheck.data.authenticated) {
-          setIsAuthenticated(true);
+        localStorage.setItem("IsAuthenticated", "true");
+        setIsAuthenticated(true);
           navigate("/dashboard");
-        }
+        
+      }
+      else{
+        localStorage.setItem("IsAuthenticated", "false");
       }
     } catch (err) {
       console.error("Login Error:", err.response?.data || err.message);
+      localStorage.setItem("IsAuthenticated", "false");
       setError("Invalid credentials!"); 
     }
   };
