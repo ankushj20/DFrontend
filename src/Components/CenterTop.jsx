@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import cookies from 'cookie'
 
 const CenterTop = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
@@ -8,18 +9,16 @@ const CenterTop = ({ setIsAuthenticated }) => {
   const handleLogout = async () => {
     try {
       await axios.post("http://localhost:5100/api/auth/logout", {}, { withCredentials: true });
-
-      setIsAuthenticated(false);  // ✅ State update karo
-      localStorage.removeItem("authToken"); 
+  
+      localStorage.clear();
       sessionStorage.clear();
-
-      setTimeout(() => {
-        navigate("/", { replace: true }); // ✅ Ensure Redirect after Logout
-      }, 100); // 🔄 Delay to allow session clear
+  
+      window.location.href = "/"; // ✅ Reliable redirect
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
+  
 
   return (
     <div className="w-full h-[20vh] bg-cyan-200 flex items-center justify-between px-4">

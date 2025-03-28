@@ -16,7 +16,7 @@ const Login = ({ setIsAuthenticated }) => {
     setError(""); 
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/auth/login`, 
+      const response = await axios.post(`http://localhost:5100/api/auth/login`, 
         { username, password }, 
         { withCredentials: true }
       );
