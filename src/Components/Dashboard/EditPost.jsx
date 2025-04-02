@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BASE_URL from "../utils/config";
-
 const EditPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
