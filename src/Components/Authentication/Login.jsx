@@ -31,7 +31,7 @@ const Login = ({ setIsAuthenticated }) => {
         localStorage.setItem("IsAuthenticated", "false");
       }
     } catch (err) {
-      console.error("Login Error:", err.response?.data || err.message);
+      console.error("Login Error:", err.message);
       localStorage.setItem("IsAuthenticated", "false");
       setError("Invalid credentials!"); 
     }

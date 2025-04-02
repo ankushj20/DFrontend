@@ -1,48 +1,140 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import BASE_URL from "../utils/config";
 
 const EditPost = () => {
   const { id } = useParams();
-  const location = useLocation();
   const navigate = useNavigate();
-  const [newPost, setNewPost] = useState(null); // ✅ Initialize properly
 
+  const [post, setPost] = useState({
+    title: "",
+    category: "",
+    images: [], // ✅ Multiple images ke liye array
+    details: "",
+  });
+
+  const [newImages, setNewImages] = useState([]); // ✅ Naye images store karne ke liye
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // 🔵 ✅ Fetch Single Post
   useEffect(() => {
-    console.log("Post ID:", id); // ✅ Check if ID is correct
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/news/posts/${id}`);
+        if (!response.ok) {
+          throw new Error("Post not found");
+        }
+        let data = await response.json();
+        console.log("Fetched Post:", data);
+        setPost(data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching post:", err);
+        setError(err.message);
+        setLoading(false);
+      }
+    };
 
-    if (!location.state?.data) {  // ✅ Check if data exists in state
-      fetch(`${BASE_URL}/api/news/posts/${id}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Post not found");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          console.log("Fetched Post Data:", data); // ✅ Debugging
-          setNewPost(data);
-        })
-        .catch((err) => {
-          console.error("Error fetching post:", err);
-          alert("Post not found!");
-          navigate("/dashboard/manage-post");
-        });
-    } else {
-      setNewPost(location.state.data); // ✅ Use state data if available
+    fetchPost();
+  }, [id]);
+
+  // 🔵 Input Change Handle
+  const handleChange = (e) => {
+    setPost({ ...post, [e.target.name]: e.target.value });
+  };
+
+  // 🔵 File Select Karne Ka Handler
+  const handleFileChange = (e) => {
+    setNewImages([...e.target.files]); // ✅ New selected images store karo
+  };
+
+  // 🔵 Edit Save Function
+  const handleSave = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("title", post.title);
+      formData.append("category", post.category);
+      formData.append("details", post.details);
+
+      // ✅ Purani images bhi bhej rahe hain
+      post.images.forEach((img) => formData.append("existingImages", img));
+
+      // ✅ Agar naye images select kiye hain to unko bhejo
+      newImages.forEach((img) => formData.append("images", img));
+
+      const response = await fetch(`${BASE_URL}/api/news/posts/${id}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (response.ok) {
+        alert("Post updated successfully!");
+        navigate("/dashboard");
+      } else {
+        throw new Error("Failed to update post");
+      }
+    } catch (err) {
+      setError(err.message);
     }
-  }, [id, navigate]);
+  };
 
-  return newPost ? (
-    <div>
-      <h1>Edit Post</h1>
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p className="text-red-600">{error}</p>;
+
+  return (
+    <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-lg">
+      <h2 className="text-2xl font-bold mb-4">Edit Post</h2>
+
+      <label className="block font-semibold">News Title:</label>
       <input
-        value={newPost.title}
-        onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+        type="text"
+        name="title"
+        value={post.title}
+        onChange={handleChange}
+        className="w-full border p-2 rounded mb-3"
       />
+
+      <label className="block font-semibold">News Category:</label>
+      <input
+        type="text"
+        name="category"
+        value={post.category}
+        onChange={handleChange}
+        className="w-full border p-2 rounded mb-3"
+      />
+
+      <label className="block font-semibold">Existing Images:</label>
+      <div className="flex gap-2 mb-3">
+        {post.images.map((img, index) => (
+          <img key={index} src={img} alt="news" className="w-20 h-20 object-cover rounded" />
+        ))}
+      </div>
+
+      <label className="block font-semibold">Upload New Images:</label>
+      <input
+        type="file"
+        multiple
+        onChange={handleFileChange}
+        className="w-full border p-2 rounded mb-3"
+      />
+
+      <label className="block font-semibold">News Description:</label>
+      <textarea
+        name="details"
+        value={post.details}
+        onChange={handleChange}
+        className="w-full border p-2 rounded mb-3"
+        rows="4"
+      ></textarea>
+
+      <button
+        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        onClick={handleSave}
+      >
+        Save Changes
+      </button>
     </div>
-  ) : (
-    <p>Loading...</p> // ✅ Show loading state
   );
 };
 

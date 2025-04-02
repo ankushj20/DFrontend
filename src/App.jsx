@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import Login from "./Components/Authentication/Login";
 import DashboardLayout from "./Components/Dashboard/DashboardLayout";
 import UploadPost from "./Components/Dashboard/UploadPost";
@@ -8,6 +8,7 @@ import Category from "./Components/Dashboard/Category";
 import ManagePosts from "./Components/Dashboard/ManagePost";
 import EditPost from "./Components/Dashboard/EditPost";
 import UploadSideAdvertise from "./Components/Dashboard/UploadSideAdvertise";
+// import NewsEdit from "./Components/Dashboard/NewsEdit";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,7 +47,8 @@ const App = () => {
         <Route path="upload-post" element={<UploadPost />} />
         <Route path="category" element={<Category />} />
         <Route path="manage-post" element={<ManagePosts />} />
-        <Route path="edit/:id" element={<EditPost />} />
+        <Route path="edit/id" element={<EditPost />} />
+        {/* <Route path="edit/:id" element={<NewsEdit />} /> */}
         <Route path="upload-advertise" element={<UploadSideAdvertise />} />
       </Route>
 

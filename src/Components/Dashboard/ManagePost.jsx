@@ -92,12 +92,26 @@ const ManagePosts = () => {
                   >
                     Delete
                   </button>
-                  <button
+                  {/* <button
                       className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 mx-1"
-                      onClick={() => navigate(`/dashboard/edit/${post._id}`, { state: { data: post } })}
+                      onClick={() => {
+                        console.log("Navigating to:", `/dashboard/edit/${post._id}`, "Data:", post);
+                        navigate(`/dashboard/edit/${post._id}`, { state: { data: post } });
+                      }}
                     >
                       Edit
-                    </button>
+                </button> */}
+                <button
+                  className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 mx-1"
+                  
+                  onClick={() => {
+                    console.log("Navigating to:",`/dashboard/edit/${post._id}`,"Data:", post);
+                    navigate(`/dashboard/edit/${post._id}`)}
+                  }
+                >
+                  Edit
+                </button>
+
                 </td>
               </tr>
             ))}
