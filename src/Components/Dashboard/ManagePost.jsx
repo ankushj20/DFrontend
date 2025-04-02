@@ -41,7 +41,7 @@ const ManagePosts = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5100/api/news/posts/${deletePostId}`, {
+      const response = await fetch(`${BASE_URL}/api/news/posts/${deletePostId}`, {
         method: "DELETE",
       });
 
