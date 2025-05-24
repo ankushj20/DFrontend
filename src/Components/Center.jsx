@@ -3,13 +3,11 @@ import CenterTop from "./CenterTop";
 
 import CenterBottom from "./CenterBottom";
 
-const Center = () => {
+const Center = ({ onToggleSidebar }) => {
   return (
-    <div className="h-full w-[75vw] bg-blue-500">
-      <CenterTop />
-      {/* Dynamic Routing Content */}
-      <CenterBottom/>
-      
+    <div className="w-full md:w-auto h-full bg-blue-500">
+      <CenterTop onToggleSidebar={onToggleSidebar} />
+      <CenterBottom />
     </div>
   );
 };

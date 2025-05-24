@@ -1,18 +1,15 @@
-import React from 'react'
-import 'remixicon/fonts/remixicon.css'
-import SideNavTop from './SideNavTop'
-import SideNavBottom from './SideNavBottom'
+import React from 'react';
+import 'remixicon/fonts/remixicon.css';
+import SideNavTop from './SideNavTop';
+import SideNavBottom from './SideNavBottom';
 
-
-const SideNav = () => {
+const SideNav = ({ closeSidebar }) => {
   return (
-    <div>
-        <div className="sideNav h-full w-[25vw] border-r-4 border-gray ">
-            <SideNavTop/>   
-            <SideNavBottom/>     
-        </div>
+    <div className="sideNav w-full md:w-[25vw] border-b md:border-b-0 md:border-r-4 border-gray-300">
+      <SideNavTop />
+      <SideNavBottom closeSidebar={closeSidebar} />
     </div>
-  )
-}
+  );
+};
 
-export default SideNav
+export default SideNav;

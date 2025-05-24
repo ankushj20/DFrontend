@@ -8,6 +8,7 @@ const categories = [
   { name: "अनुकर्णिया", slug: "education" },
   { name: "अपना एमपी", slug: "entertainment" },
   { name: "यह भी पढिये", slug: "knowladge" },
+  { name: "Dummy", slug: "Dummy" },
 
 ];
 

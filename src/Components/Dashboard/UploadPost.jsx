@@ -71,100 +71,124 @@ const UploadPost = () => {
   };
 
   return (
-    <div className="w-full min-h-full bg-white p-6">
-      <h1 className="text-2xl font-bold mb-4 rounded-lg text-white bg-black px-5 py-1 max-w-fit">
-        Upload Post
-      </h1>
+    <div className="w-full min-h-full bg-white px-4 py-8">
+  <div className="max-w-xl mx-auto">
+    <h1 className="text-2xl font-bold mb-6 rounded-lg text-white bg-black px-5 py-1 w-fit">
+      Upload Post
+    </h1>
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+    {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Category Selection */}
-        <div>
-          <label htmlFor="category" className="block text-lg font-medium">News Category</label>
-          <select
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2"
-            required
-          >
-            <option value="" disabled>Select a category</option>
-            <option value="खबर पालिका">खबर पालिका</option>
-            <option value="मंत्री संतरी">मंत्री संतरी</option>
-            <option value="कोर्ट कचेरी">कोर्ट कचेरी</option>
-            <option value="अनुकर्णिया">अनुकर्णिया</option>
-            <option value="अपना एमपी">अपना एमपी</option>
-            <option value="यह भी पढिये">यह भी पढिये</option>
-          </select>
-        </div>
-
-        {/* Title Input */}
-        <div>
-          <label htmlFor="title" className="block text-lg font-medium">News Title</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter news title"
-            className="w-full border text-xl border-gray-300 rounded-md p-2"
-            required
-          />
-        </div>
-
-        {/* Details Input */}
-        <div>
-          <label htmlFor="details" className="block text-lg font-medium">News Details</label>
-          <textarea
-            id="details"
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
-            placeholder="Enter news details"
-            className="w-full border border-gray-300 rounded-md p-2"
-            rows="5"
-            required
-          />
-        </div>
-
-        {/* Image Upload */}
-        <div>
-          <label htmlFor="images" className="block text-lg font-medium">Upload Images</label>
-          <input type="file" multiple onChange={handleImageChange} className="w-full border border-gray-300 rounded-md p-2" />
-          {previews.length > 0 && (
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              {previews.map((preview, index) => (
-                <img key={index} src={preview} alt={`Preview ${index + 1}`} className="border border-gray-300 rounded-md" />
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600"
-          disabled={loading}
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Category Selection */}
+      <div>
+        <label htmlFor="category" className="block text-lg font-medium">
+          News Category
+        </label>
+        <select
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full border border-gray-300 rounded-md p-2"
+          required
         >
-          {loading ? "Uploading..." : "Submit News"}
-        </button>
-      </form>
+          <option value="" disabled>Select a category</option>
+          <option value="Home">Home</option>
+          <option value="खबर पालिका">खबर पालिका</option>
+          <option value="मंत्री संतरी">मंत्री संतरी</option>
+          <option value="कोर्ट कचेरी">कोर्ट कचेरी</option>
+          <option value="अनुकर्णिया">अनुकर्णिया</option>
+          <option value="अपना एमपी">अपना एमपी</option>
+          <option value="यह भी पढिये">यह भी पढिये</option>
+        </select>
+      </div>
 
-      {/* Success Modal */}
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-            <h2 className="text-lg font-semibold mb-4">News Uploaded Successfully!</h2>
-            <button
-              onClick={() => setShowModal(false)}
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            >
-              OK
-            </button>
+      {/* Title Input */}
+      <div>
+        <label htmlFor="title" className="block text-lg font-medium">
+          News Title
+        </label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter news title"
+          className="w-full border text-xl border-gray-300 rounded-md p-2"
+          required
+        />
+      </div>
+
+      {/* Details Input */}
+      <div>
+        <label htmlFor="details" className="block text-lg font-medium">
+          News Details
+        </label>
+        <textarea
+          id="details"
+          value={details}
+          onChange={(e) => setDetails(e.target.value)}
+          placeholder="Enter news details"
+          className="w-full border border-gray-300 rounded-md p-2"
+          rows="5"
+          required
+        />
+      </div>
+
+      {/* Image Upload */}
+      <div>
+        <label htmlFor="images" className="block text-lg font-medium">
+          Upload Images
+        </label>
+        <input
+          type="file"
+          multiple
+          onChange={handleImageChange}
+          className="w-full border border-gray-300 rounded-md p-2"
+        />
+        {previews.length > 0 && (
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {previews.map((preview, index) => (
+              <img
+                key={index}
+                src={preview}
+                alt={`Preview ${index + 1}`}
+                className="border border-gray-300 rounded-md w-full h-40 object-cover"
+              />
+            ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
+        disabled={loading}
+      >
+        {loading ? "Uploading..." : "Submit News"}
+      </button>
+    </form>
+  </div>
+
+  {/* Success Modal */}
+  {showModal && (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
+      <div className="bg-white p-6 rounded-lg shadow-lg text-center w-full max-w-sm">
+        <h2 className="text-lg font-semibold mb-4">
+          News Uploaded Successfully!
+        </h2>
+        <button
+          onClick={() => setShowModal(false)}
+          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+        >
+          OK
+        </button>
+      </div>
     </div>
+  )}
+</div>
+
   );
 };
 

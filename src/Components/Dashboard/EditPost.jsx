@@ -255,6 +255,7 @@ const EditPost = () => {
         className="w-full border p-2 rounded mb-3"
       >
         <option value="" disabled>Select a category</option>
+        <option value="Dummy">Dummy</option>
         <option value="खबर पालिका">खबर पालिका</option>
         <option value="मंत्री संतरी">मंत्री संतरी</option>
         <option value="कोर्ट कचेरी">कोर्ट कचेरी</option>

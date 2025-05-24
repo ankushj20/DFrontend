@@ -59,71 +59,67 @@ const ManagePosts = () => {
 
   return (
     <div className="manage-posts p-6 bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4 rounded-lg text-white bg-black px-5 py-1 max-w-fit">
-        Manage Posts
-      </h1>
+  <h1 className="text-2xl font-bold mb-4 rounded-lg text-white bg-black px-5 py-1 max-w-fit">
+    Manage Posts
+  </h1>
 
-      {error && <p className="text-center text-red-600">{error}</p>}
+  {error && <p className="text-center text-red-600">{error}</p>}
 
-      {posts.length > 0 ? (
-        <table className="min-w-full bg-white border border-gray-300 rounded-md shadow-md">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="py-2 px-4 text-left">Title</th>
-              <th className="py-2 px-4 text-left">Category</th>
-              <th className="py-2 px-4 text-left">Date</th>
-              <th className="py-2 px-4 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {posts.map((post) => (
-              <tr key={post._id} className="border-t">
-                <td className="border text-2xl font-semibold px-4 py-2">
-                  {post.title.length > 50 ? post.title.substring(0, 50) + "..." : post.title}
-                </td>
-                <td className="border px-4 py-2">{post.category || "N/A"}</td>
-                <td className="border px-4 py-2">
-                  {post.createdAt ? post.createdAt.split("T")[0] : "Date Not Available"}
-                </td>
-                <td className="border px-4 py-2 text-center">
-                  <button
-                    className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 mx-1"
-                    onClick={() => openDeleteModal(post._id)}
-                  >
-                    Delete
-                  </button>
-                  {/* <button
-                      className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 mx-1"
-                      onClick={() => {
-                        console.log("Navigating to:", `/dashboard/edit/${post._id}`, "Data:", post);
-                        navigate(`/dashboard/edit/${post._id}`, { state: { data: post } });
-                      }}
-                    >
-                      Edit
-                </button> */}
+  {posts.length > 0 ? (
+    <div className="overflow-x-auto">
+      <table className="min-w-full bg-white border border-gray-300 rounded-md shadow-md">
+        <thead>
+          <tr className="bg-gray-200">
+            <th className="py-2 px-3 text-left text-sm sm:text-base">Title</th>
+            <th className="py-2 px-3 text-left text-sm sm:text-base">Category</th>
+            <th className="py-2 px-3 text-left text-sm sm:text-base">Date</th>
+            <th className="py-2 px-3 text-center text-sm sm:text-base">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {posts.map((post) => (
+            <tr key={post._id} className="border-t">
+              <td className="border text-lg sm:text-2xl font-semibold px-3 py-2 max-w-xs truncate" title={post.title}>
+                {post.title.length > 50 ? post.title.substring(0, 50) + "..." : post.title}
+              </td>
+              <td className="border px-3 py-2 text-sm sm:text-base">{post.category || "N/A"}</td>
+              <td className="border px-3 py-2 text-sm sm:text-base">
+                {post.createdAt ? post.createdAt.split("T")[0] : "Date Not Available"}
+              </td>
+              <td className="border px-3 py-2 text-center space-x-1">
                 <button
-                  className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 mx-1"
-                  
+                  className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600 text-xs sm:text-sm"
+                  onClick={() => openDeleteModal(post._id)}
+                >
+                  Delete
+                </button>
+                <button
+                  className="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600 text-xs sm:text-sm"
                   onClick={() => {
-                    console.log("Navigating to:",`/dashboard/edit/${post._id}`,"Data:", post);
-                    navigate(`/dashboard/edit/${post._id}`)}
-                  }
+                    console.log("Navigating to:", `/dashboard/edit/${post._id}`, "Data:", post);
+                    navigate(`/dashboard/edit/${post._id}`);
+                  }}
                 >
                   Edit
                 </button>
-
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p className="text-center text-gray-600">No posts found</p>
-      )}
-
-      {/* ✅ Delete Confirmation Modal */}
-      <DeleteConfirmModal isOpen={isModalOpen} closeModal={closeModal} handleDelete={handleDelete} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
+  ) : (
+    <p className="text-center text-gray-600">No posts found</p>
+  )}
+
+  {/* Delete Confirmation Modal */}
+  <DeleteConfirmModal
+    isOpen={isModalOpen}
+    closeModal={closeModal}
+    handleDelete={handleDelete}
+  />
+</div>
+
   );
 };
 
