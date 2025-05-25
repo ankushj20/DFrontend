@@ -23,7 +23,7 @@ const SideNavBottom = ({ closeSidebar }) => {
       <NavItem to="/dashboard/upload-advertise" icon="ri-advertisement-line" text="Upload Advertise" closeSidebar={closeSidebar} />
       <NavItem to="/dashboard/category" icon="ri-menu-search-line" text="Category" closeSidebar={closeSidebar} />
       <NavItem to="/dashboard/upload-post" icon="ri-upload-2-line" text="Upload Post" closeSidebar={closeSidebar} />
-      <NavItem to="/dashboard/manage-post" icon="ri-stack-line" text="Manage Post" closeSidebar={closeSidebar} />
+      <NavItem to="/dashboard/manage-post"  icon="ri-stack-line" text="Manage Post" closeSidebar={closeSidebar} />
     </div>
   );
 };

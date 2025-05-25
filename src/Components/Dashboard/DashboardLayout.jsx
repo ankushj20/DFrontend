@@ -96,7 +96,7 @@ const DashboardLayout = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 h-full w-64 bg-gray-200 z-50 transform transition-transform duration-300 ease-in-out
+           top-0 left-0 h-full  w-64  transform transition-transform duration-300 ease-in-out
           md:relative md:translate-x-0 md:w-1/4 md:block
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
@@ -113,7 +113,7 @@ const DashboardLayout = () => {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 bg-gray-50 p-4 overflow-y-auto h-full md:ml-64">
+      <main className="flex-1 bg-gray-50 p-4 overflow-y-auto h-full ">
         <Center onToggleSidebar={toggleSidebar}>
           <Outlet />
         </Center>
